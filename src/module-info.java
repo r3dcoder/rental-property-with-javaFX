@@ -1,5 +1,7 @@
-module PropertryFX {
+module propertyrental {
 	requires javafx.controls;
-	
-	opens application to javafx.graphics, javafx.fxml;
+	requires javafx.fxml;
+	requires javafx.base;
+	opens property.models;
+	opens property to javafx.graphics, javafx.fxml;
 }
