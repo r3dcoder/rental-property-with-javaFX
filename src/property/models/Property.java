@@ -1,6 +1,7 @@
 package property.models;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Property  implements Serializable {
@@ -42,6 +43,7 @@ public class Property  implements Serializable {
     }
 
     public Date getListed() {
+    	 
         return listed;
     }
     
@@ -130,20 +132,39 @@ public class Property  implements Serializable {
     
     public String getDetails() {
         StringBuilder sb = new StringBuilder();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = sdf.format(listed);
+        
         sb.append("Property Details:\n");
         sb.append("-----------------\n");
-        sb.append("Listed: ").append(this.getListed()).append("\n");
+        sb.append("Listed: ").append(formattedDate).append("\n");
+        sb.append("\n");
         sb.append("Bedrooms: ").append(this.getBedrooms()).append("\n");
+        sb.append("\n");
         sb.append("Bathrooms: ").append(this.getBathrooms()).append("\n");
+        sb.append("\n");
         sb.append("Rent per month: ").append(this.getRentPerMonth()).append("\n");
+        sb.append("\n");
         sb.append("Size: ").append(this.getSize()).append("\n");
+        sb.append("\n");
         sb.append("Postcode: ").append(this.getPostcode()).append("\n");
+        sb.append("\n");
         sb.append("Latitude: ").append(this.getLatitude()).append("\n");
+        sb.append("\n");
         sb.append("Longitude: ").append(this.getLongitude()).append("\n");
+        sb.append("\n");
         sb.append("Furnishing status: ").append(this.getFurnishingStatus()).append("\n");
+        sb.append("\n");
         sb.append("Type: ").append(this.getType()).append("\n");
+        sb.append("\n");
         sb.append("Garden: ").append(this.getGarden()).append("\n");
+        sb.append("\n");
         return sb.toString();
+    }
+    
+    public String toString() {
+    	return getDetails();
     }
 
 }

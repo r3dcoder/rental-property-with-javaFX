@@ -1,5 +1,6 @@
 package property;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import property.models.Property;
@@ -48,6 +50,10 @@ public class ProperyListVIewController implements Initializable {
 	@FXML
 	private TableColumn<Property, Double> size;
 
+	@FXML
+	private TextArea propertyDetails;
+	private Main main;
+	
 	ObservableList<Property> list = FXCollections.observableArrayList(
 			DeserializePropertyList.readChildList()
 			);
@@ -62,16 +68,36 @@ public class ProperyListVIewController implements Initializable {
 		
 		populatePropertyTable();
 		
-		// Add an EventHandler to the search button
-//        searchButton.setOnAction(event -> searchTable());
+		table.setOnMouseClicked(event -> {
+				
+				goPropertyDetails();
+	        });
+	    
+
+	 
 	}
 
+	private void goPropertyDetails()   {
+		main = new Main();
+		System.out.println("called goPropertyDetails method: ");
+		
+		Property selectedProperty = table.getSelectionModel().getSelectedItem();
+//		propertyDetails.setText(selectedProperty.getDetails());
+		
+		try {
+			main.showPropertyDetailsView(selectedProperty);
+						
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("error from go property details method");
+		}
+ 	}
+
 	private void populatePropertyTable() {
-//		TableColumn<Property, Date> listedColumn = new TableColumn<>("Listed");
+		
 		listed.setCellValueFactory(new PropertyValueFactory<>("listed"));
 		listed.setCellFactory(new CustomDateCellFactory<>("MM/dd/yyyy"));
- 
-//		listed.setCellValueFactory( new PropertyValueFactory<Property, Date>("listed"));
+
 		bathrooms.setCellValueFactory( new PropertyValueFactory<Property, Integer>("bathrooms"));
 		bedrooms.setCellValueFactory( new PropertyValueFactory<Property, Integer>("bedrooms"));
 		rentPerMonth.setCellValueFactory( new PropertyValueFactory<Property, Double>("rentPerMonth"));

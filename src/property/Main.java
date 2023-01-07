@@ -25,11 +25,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// Set up the main layout
 		this.primaryStage = primaryStage;
-		 showHomePage();
-//		showPropertyListView();
+		showHomePage();
+		//		showPropertyListView();
 
 	}
-	
+
 	public void showHomePage() throws IOException {
 		showMainView();
 		showMainItems();
@@ -66,9 +66,21 @@ public class Main extends Application {
 	public void showPropertyListView() throws IOException {
 
 		System.out.println("showPropertyListView Clicked");
- 		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/PropertyListView.fxml"));
-//		mainLayout = loader.load();
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/PropertyListView.fxml"));
 		BorderPane  mainItems = loader.load();
+		mainLayout.setCenter(mainItems);
+
+	}
+
+	public void showPropertyDetailsView(Property property) throws IOException {
+
+		System.out.println("property detials Clicked" + property);
+
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/PropertyDetailsView.fxml"));
+		BorderPane  mainItems = loader.load();
+		PropertyDetailsController propertyDetailsController = loader.getController();
+ 		propertyDetailsController.setProperty(property);
+// 	
 		mainLayout.setCenter(mainItems);
 
 	}

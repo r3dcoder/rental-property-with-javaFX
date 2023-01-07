@@ -17,7 +17,7 @@
                <children>
                   <Label text="Search" />
                   <TextField fx:id="searchField" maxWidth="150.0" onAction="#onClickedsearchButton" promptText="NN3 8QQ" />
-                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickedsearchButton" text="Button" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickedsearchButton" text="Search" />
                </children>
             </HBox>
             <TableView fx:id="table" prefHeight="442.0" prefWidth="695.0">
