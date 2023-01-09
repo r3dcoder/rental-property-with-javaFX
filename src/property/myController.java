@@ -56,7 +56,7 @@ public class myController {
 	 }
  	
  	@FXML
-	 private void onClickedHomeButton() throws IOException {
+	 public void onClickedHomeButton() throws IOException {
 	     try {
 	    	 	main.showHomePage();
 	      

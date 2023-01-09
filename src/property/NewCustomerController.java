@@ -1,5 +1,6 @@
 package property;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -86,5 +87,11 @@ public class NewCustomerController {
 
 
 	}
+	
+	@FXML
+	 private void onClickedHomeButton() throws IOException {
+		myController myController = new myController();
+		myController.onClickedHomeButton();
+	 }
 
 }

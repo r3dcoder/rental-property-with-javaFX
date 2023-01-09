@@ -133,9 +133,12 @@
       </HBox>
    </center>
    <bottom>
-      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClickCustomerSaveButton" text="Save.." />
+            <Button mnemonicParsing="false" onAction="#onClickCustomerSaveButton" text="Save">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
          </children>
       </HBox>
    </bottom>
