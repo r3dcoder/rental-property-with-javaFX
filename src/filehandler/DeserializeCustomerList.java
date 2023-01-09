@@ -6,21 +6,22 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import customer.models.Customer;
 import property.models.Property;
 
-public class DeserializePropertyList {
+public class DeserializeCustomerList {
 	
-	public static ArrayList<Property> readChildList()  {
-		ArrayList<Property> list = new ArrayList<Property>();
+	public static ArrayList<Customer> readChildList()  {
+		ArrayList<Customer> list = new ArrayList<Customer>();
 		
 		try
 		{
-			   File f = new File("property.dat");
+			   File f = new File("customer.dat");
 			   FileInputStream inStream;
 			   ObjectInputStream objectInputFile = null;
 		        if (f.exists())  {
 		// Create the stream objects.
-	       inStream =  new FileInputStream("property.dat");
+	       inStream =  new FileInputStream("customer.dat");
 	      objectInputFile = new ObjectInputStream(inStream);
 		        }
 	      else 
@@ -30,7 +31,7 @@ public class DeserializePropertyList {
 	      // Read the serialized objects from the file.
 	 
 	        if (f.length()>0) {
-	        list = (ArrayList<Property>) objectInputFile.readObject();
+	        list = (ArrayList<Customer>) objectInputFile.readObject();
 	        objectInputFile.close();
 	        }
 	        else 
@@ -50,8 +51,8 @@ public class DeserializePropertyList {
 	      // Display the objects.
 	      for (int i = 0; i < list.size(); i++)
 	      {
-	    	  Property  c =  (Property) list.get(i);
-	         System.out.println("Child Name " + c.getDetails());
+	    	  Customer  c =  (Customer) list.get(i);
+	         System.out.println("Child Name " + c);
 	          
 	      }
 		return list;

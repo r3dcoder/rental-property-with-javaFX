@@ -55,7 +55,7 @@ public class CSVReader {
                  p.setType(values[9].toString());
                  p.setGarden(values[10].toString());
                  
-//                System.out.println(p.getDetails());
+                System.out.println(p.getDetails());
                 list.add(p);
           	   
            	   
@@ -67,7 +67,7 @@ public class CSVReader {
 			e.printStackTrace();
 		}
           
-          SerializeChildList.writeToFile(list); 
+           SerializeChildList.writeToFile(list, "property.dat"); 
     	   list = DeserializePropertyList.readChildList();
     }
 

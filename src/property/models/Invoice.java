@@ -1,5 +1,6 @@
 package property.models;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Invoice {
@@ -10,6 +11,7 @@ public class Invoice {
     private double amountDue;
 
     private double deposit;
+    private Date inviceDate;
     private double agentFee;
 
     public Invoice(User tenant, Property property, Date startDate, Date endDate, double amountDue) {
@@ -22,6 +24,7 @@ public class Invoice {
         this.deposit = property.getRentPerMonth() * 6;
         this.agentFee = property.getRentPerMonth() * 0.2;
         this.amountDue = amountDue + this.deposit + this.agentFee;
+        this.inviceDate = new Date();
     }
 
 
@@ -51,6 +54,15 @@ public class Invoice {
 
     public double getAmountDue() {
         return amountDue;
+    }
+    
+    @Override
+    public String toString() {
+ 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+ 
+        StringBuilder sb = new StringBuilder();
+         return sb.toString();
     }
 }
 

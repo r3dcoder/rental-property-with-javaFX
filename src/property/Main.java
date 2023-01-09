@@ -33,6 +33,10 @@ public class Main extends Application {
 	public void showHomePage() throws IOException {
 		showMainView();
 		showMainItems();
+		CSVReader reader = new CSVReader();
+		reader.setCsvFile("House_Rent_Dataset.csv");
+		reader.fileRead();
+		
 	}
 
 	private void showMainItems() throws IOException {
@@ -43,9 +47,9 @@ public class Main extends Application {
 		ArrayList<Property> list = new ArrayList<Property>(); 
 		list = DeserializePropertyList.readChildList();
 
-		CSVReader csvReader = new CSVReader();
-		csvReader.setCsvFile("House_Rent_Dataset.csv");
-		csvReader.fileRead();
+//		CSVReader csvReader = new CSVReader();
+//		csvReader.setCsvFile("House_Rent_Dataset.csv");
+//		csvReader.fileRead();
 
 
 	}
@@ -65,6 +69,7 @@ public class Main extends Application {
 
 	public void showPropertyListView() throws IOException {
 
+		
 		System.out.println("showPropertyListView Clicked");
 		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/PropertyListView.fxml"));
 		BorderPane  mainItems = loader.load();
@@ -80,7 +85,7 @@ public class Main extends Application {
 		BorderPane  mainItems = loader.load();
 		PropertyDetailsController propertyDetailsController = loader.getController();
  		propertyDetailsController.setProperty(property);
-// 	
+
 		mainLayout.setCenter(mainItems);
 
 	}
@@ -100,6 +105,43 @@ public class Main extends Application {
 		addDialougeStage.setScene(sceen);
 		addDialougeStage.show();
 	} 
+	
+//	Customers view handelling
+	
+	public void showCustomerListView() throws IOException {
+		
+		System.out.println("showCustomerListView Clicked");
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/CustomerListView.fxml"));
+		BorderPane  mainLayout = loader.load();
+ 
+		// Set the scene
+		this.primaryStage.setTitle("Rental House App/Customer List");
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+
+	}
+	
+	public void showNewCustomerPageView() throws IOException {
+		
+		System.out.println("showCustomerListView Clicked");
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/NewCustomerPageView.fxml"));
+		BorderPane  mainLayout = loader.load();
+ 
+		// Set the scene
+		this.primaryStage.setTitle("Rental House App/New Customer Form");
+		
+		FXMLLoader form = new FXMLLoader(Main.class.getResource("view/NewCustomerFormView.fxml"));
+		BorderPane  mainItems = form.load();
+		mainLayout.setCenter(mainItems);
+		
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+
+	}
+	
+	
 
 
 	public static void main(String[] args) {

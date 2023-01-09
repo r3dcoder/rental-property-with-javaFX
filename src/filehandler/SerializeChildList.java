@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class SerializeChildList {
 	
-	public static void writeToFile(ArrayList childList)  {
+	public static void writeToFile(ArrayList childList,String fileName)  {
 		
 		 try
 		 {
 		 // Create the stream objects.
 	      FileOutputStream outStream = 
-	                new FileOutputStream("Objects.dat");
+	                new FileOutputStream(fileName);
 	      ObjectOutputStream objectOutputFile = 
 	                new ObjectOutputStream(outStream);
 	      
@@ -25,16 +25,14 @@ public class SerializeChildList {
 	      
 	      // Close the file.
 	      objectOutputFile.close();
-	      System.out.println("The serialized objects " +
-		            "were written to the Objects.dat file.");
+	      System.out.println("("+childList.size()+ ") The serialized objects " +
+		            "were written to the "+fileName+"  file.");
 		 } catch(IOException e)
 		 {
 			 System.out.println("OOps...there was a problem");
 			 e.printStackTrace();
 		 }
-	      
-	      System.out.println("The serialized objects " +
-	            "were written to the Objects.dat file.");
+	       
 		
 	}
 

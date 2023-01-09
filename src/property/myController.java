@@ -31,6 +31,18 @@ public class myController {
 	         e.printStackTrace();
 	     }
 	 }
+ 	 
+
+ 	 @FXML
+	 private void onClickedCustomerListButton() throws IOException {
+	     try {
+	         System.out.println("Trying to call showAddPropertyView on main object");
+	         main.showCustomerListView();
+	     } catch (Exception e) {
+	         System.out.println("Error calling showAddPropertyView on main object: " + e.getMessage());
+	         e.printStackTrace();
+	     }
+	 }
  	
  	@FXML
 	 private void onClickedPropertyListButton() throws IOException {

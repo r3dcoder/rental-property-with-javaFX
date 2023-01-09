@@ -10,7 +10,7 @@
    <center>
       <FlowPane hgap="20.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button defaultButton="true" lineSpacing="2.0" mnemonicParsing="false" onAction="#onClickedPropertyListButton" prefHeight="120.0" prefWidth="120.0" text="View Properties" textAlignment="CENTER" textFill="#030428">
+            <Button defaultButton="true" lineSpacing="2.0" mnemonicParsing="false" onAction="#onClickedPropertyListButton" prefHeight="120.0" prefWidth="126.0" text="View Properties" textAlignment="CENTER" textFill="#030428">
                <FlowPane.margin>
                   <Insets />
                </FlowPane.margin>
@@ -21,7 +21,7 @@
                   <Insets top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button defaultButton="true" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" text="View User" textFill="#0d0b75" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#onClickedCustomerListButton" prefHeight="120.0" prefWidth="134.0" text="View Customers" textFill="#0d0b75" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -91,7 +91,7 @@ public class addNewPropertyController {
 			if(obj.allFieldsAreNotNull(p)){
 				ArrayList<Property> list = DeserializePropertyList.readChildList();
 				list.add(p);
-				SerializeChildList.writeToFile(list); 
+				SerializeChildList.writeToFile(list, "property.dat"); 
 				list = DeserializePropertyList.readChildList();
 				
 				handleCloseButtonAction(event); //modal close after save
