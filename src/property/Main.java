@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import property.models.Invoice;
 import property.models.Property;
 
 public class Main extends Application {
@@ -33,9 +34,9 @@ public class Main extends Application {
 	public void showHomePage() throws IOException {
 		showMainView();
 		showMainItems();
-		CSVReader reader = new CSVReader();
-		reader.setCsvFile("House_Rent_Dataset.csv");
-		reader.fileRead();
+//		CSVReader reader = new CSVReader();
+//		reader.setCsvFile("House_Rent_Dataset.csv");
+//		reader.fileRead();
 		
 	}
 
@@ -47,9 +48,11 @@ public class Main extends Application {
 		ArrayList<Property> list = new ArrayList<Property>(); 
 		list = DeserializePropertyList.readChildList();
 
-//		CSVReader csvReader = new CSVReader();
-//		csvReader.setCsvFile("House_Rent_Dataset.csv");
-//		csvReader.fileRead();
+		if(list.size()==0) {
+			CSVReader csvReader = new CSVReader();
+			csvReader.setCsvFile("House_Rent_Dataset.csv");
+			csvReader.fileRead();
+		}
 
 
 	}
@@ -122,6 +125,26 @@ public class Main extends Application {
 
 	}
 	
+	public void showAssignCustomerFormView(String propertyId) throws IOException {
+
+		//        System.out.println("Clicked");
+
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/AssigningPropertyFormView.fxml"));
+		BorderPane newProperty = loader.load();
+
+		Stage addDialougeStage = new Stage();
+		addDialougeStage.setTitle("Assign Property");
+		addDialougeStage.initModality(Modality.WINDOW_MODAL);
+		
+		AissignCustomerController controller = loader.getController();
+ 		controller.setPropertyId(propertyId);
+ 		
+		addDialougeStage.initOwner(primaryStage);
+		Scene sceen = new Scene(newProperty);
+		addDialougeStage.setScene(sceen);
+		addDialougeStage.show();
+	} 
+	
 	public void showNewCustomerPageView() throws IOException {
 		
 		System.out.println("showCustomerListView Clicked");
@@ -141,9 +164,22 @@ public class Main extends Application {
 
 	}
 	
+	public void showInvoiceDetailsView(Invoice invoice) throws IOException {
+
+ 
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/InvoicePageView.fxml"));
+		BorderPane  mainItems = loader.load();
+		InvoiceController invoicecontroller = loader.getController();
+		System.out.println("invoice : "+ invoice);
+		invoicecontroller.setInvoice(invoice);
+//
+		mainLayout.setCenter(mainItems);
+
+	}
 	
 
 
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

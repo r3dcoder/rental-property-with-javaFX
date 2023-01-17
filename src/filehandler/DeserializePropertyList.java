@@ -51,7 +51,7 @@ public class DeserializePropertyList {
 	      for (int i = 0; i < list.size(); i++)
 	      {
 	    	  Property  c =  (Property) list.get(i);
-	         System.out.println("Child Name " + c.getDetails());
+//	         System.out.println("Child Name " + c.getDetails());
 	          
 	      }
 		return list;

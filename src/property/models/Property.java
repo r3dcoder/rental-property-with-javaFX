@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import helper.UniqueIdGenerator;
+
 public class Property  implements Serializable {
     private static final long serialVersionUID = 1L;
+    private String id;
 	private Date listed;
     private int bedrooms;
     private int bathrooms;
@@ -17,9 +20,14 @@ public class Property  implements Serializable {
     private String furnishingStatus;
     private String type;
     private String garden;
+    private boolean isAvailable;
     
     public Property() {
-    
+    	
+    	UniqueIdGenerator genId = new UniqueIdGenerator();
+        this.isAvailable = true;
+        this.id = genId.getUniqueID();
+        System.out.println("genId" + this.id);
     }
     
     
@@ -40,6 +48,12 @@ public class Property  implements Serializable {
         this.furnishingStatus = furnishingStatus;
         this.type = type;
         this.garden = garden;
+        this.isAvailable  = true;
+        
+        UniqueIdGenerator genId = new UniqueIdGenerator();
+        
+        this.id =  genId.getUniqueID();
+         
     }
 
     public Date getListed() {
@@ -138,6 +152,7 @@ public class Property  implements Serializable {
         
         sb.append("Property Details:\n");
         sb.append("-----------------\n");
+        sb.append("ID: ").append(id).append("\n");
         sb.append("Listed: ").append(formattedDate).append("\n");
         sb.append("\n");
         sb.append("Bedrooms: ").append(this.getBedrooms()).append("\n");
@@ -160,11 +175,32 @@ public class Property  implements Serializable {
         sb.append("\n");
         sb.append("Garden: ").append(this.getGarden()).append("\n");
         sb.append("\n");
+        sb.append("Available: ").append(this.getIsAvailable()).append("\n");
         return sb.toString();
     }
     
     public String toString() {
     	return getDetails();
     }
+
+
+	public boolean getIsAvailable() {
+		return isAvailable;
+	}
+
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 }

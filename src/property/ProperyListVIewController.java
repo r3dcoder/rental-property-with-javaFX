@@ -72,9 +72,7 @@ public class ProperyListVIewController implements Initializable {
 				
 				goPropertyDetails();
 	        });
-	    
-
-	 
+	     
 	}
 
 	private void goPropertyDetails()   {

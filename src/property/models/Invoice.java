@@ -3,28 +3,34 @@ package property.models;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import customer.models.Customer;
+
 public class Invoice {
-    private User tenant;
+    private Customer tenant;
     private Property property;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private double amountDue;
 
     private double deposit;
     private Date inviceDate;
     private double agentFee;
-
-    public Invoice(User tenant, Property property, Date startDate, Date endDate, double amountDue) {
+    private double subTotal = 0;
+    
+    public Invoice(Customer tenant, Property property, String startDate, 
+    		String endDate, double customerDeposite) {
+    	
         this.tenant = tenant;
         this.property = property;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.amountDue = amountDue;
+         
 
         this.deposit = property.getRentPerMonth() * 6;
         this.agentFee = property.getRentPerMonth() * 0.2;
-        this.amountDue = amountDue + this.deposit + this.agentFee;
-        this.inviceDate = new Date();
+        this.subTotal =  this.deposit + this.agentFee;
+        this.amountDue = subTotal - customerDeposite;
+        this.setInviceDate(new Date());
     }
 
 
@@ -36,7 +42,7 @@ public class Invoice {
         return agentFee;
     }
 
-    public User getTenant() {
+    public Customer getTenant() {
         return tenant;
     }
 
@@ -44,11 +50,11 @@ public class Invoice {
         return property;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
@@ -62,7 +68,52 @@ public class Invoice {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
  
         StringBuilder sb = new StringBuilder();
-         return sb.toString();
+        sb.append("-----------------Invoice--------------").append("\n");
+        sb.append("......................................\n");
+        
+        sb.append("Invoice Date: ----------").append(this.getInviceDate()).append("\n");
+        sb.append("\n");
+        sb.append("Property Id: -----------").append(this.property.getId()).append("\n");
+        sb.append("\n");
+        
+        
+        sb.append("Customer Name: ---------").append(this.getTenant().getFullName()).append("\n");
+        sb.append("\n");
+        sb.append("Start Date: ------------").append(this.getStartDate()).append("\n");
+        sb.append("\n");
+        
+
+        sb.append("End Date: --------------").append(this.getEndDate()).append("\n");
+        sb.append("\n");
+        sb.append("Rent/Month: ------------").append(this.property.getRentPerMonth()).append("\n");
+        sb.append("\n");
+        sb.append("Number of Months: ------").append(6).append("\n");
+        sb.append("\n");
+        sb.append("Agent Fee --------------").append(this.getAgentFee()).append("\n");
+        sb.append("\n");
+        sb.append("Subtotal: --------------").append(this.getSubTotal()).append("\n");
+        sb.append("\n");
+        return sb.toString();
     }
+
+
+	public Date getInviceDate() {
+		return inviceDate;
+	}
+
+
+	public void setInviceDate(Date inviceDate) {
+		this.inviceDate = inviceDate;
+	}
+
+
+	public double getSubTotal() {
+		return subTotal;
+	}
+
+
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
+	}
 }
 

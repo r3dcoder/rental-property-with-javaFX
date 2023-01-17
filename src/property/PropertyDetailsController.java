@@ -1,11 +1,13 @@
 package property;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import filehandler.CSVReaderForPlaceOfInterest;
 import helper.DistanceCalculator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import property.models.PlaceOfInterest;
@@ -13,6 +15,7 @@ import property.models.Property;
 
 public class PropertyDetailsController {
 
+	public Main main;
 
 	private Property property;
 	@FXML 
@@ -23,7 +26,7 @@ public class PropertyDetailsController {
 
 	public PropertyDetailsController() {
 
-
+		main = new Main();
 	}
 	public Property getProperty() {
 		return property;
@@ -74,6 +77,13 @@ public class PropertyDetailsController {
 		return sb.toString();
 
 
+	}
+	
+	@FXML 
+	public void onClickedAssignedToCustomer(ActionEvent event) throws IOException {
+		System.out.println("onClickedAssignedToCustomer: "+ property.getBathrooms());
+		main.showAssignCustomerFormView(property.getId());
+		System.out.println(property.getId());
 	}
 	private void updateUI() {
 		propertyDetails.setText(getDetails());

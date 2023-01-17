@@ -1,6 +1,9 @@
 package customer.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import filehandler.DeserializeCustomerList;
 
 public class Customer implements Serializable  {
     private static final long serialVersionUID = 1L;
@@ -11,6 +14,9 @@ public class Customer implements Serializable  {
     private String address;
     private String gender;
 
+    public Customer() {
+    	
+    };
     public Customer(String firstName, String lastName, String email, String phoneNumber, String address, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -69,11 +75,26 @@ public class Customer implements Serializable  {
 	}
 	
 	public String toString() {
-		String str = "First Name: " + firstName + " \n" ;
-		str+="Last Name: " + lastName + " \n";
-		str+="email: " + email + " \n";
-		str+="address: " + address + " \n";
-		str+="gender: " + gender + " \n";
-		return str;
+		 
+		return getFullName();
+	}
+	
+	public String getFullName() {
+		
+		return firstName + ' ' + lastName;
+	}
+	
+	public ArrayList<Customer> getCusomers() {
+		ArrayList<Customer> customers =  DeserializeCustomerList.readChildList();
+		return customers;	
+	}
+	
+	public Customer getCustomer(String fullName) {
+		for(int i = 0; i<getCusomers().size(); i++) {
+			if(getCusomers().get(i).getFullName().equals(fullName)) {
+				return getCusomers().get(i);
+			}
+		}
+		return null;
 	}
 }
