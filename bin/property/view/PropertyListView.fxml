@@ -11,10 +11,11 @@
 
 <BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="property.ProperyListVIewController">
    <center>
-      <FlowPane maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <FlowPane maxWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="700.0" spacing="10.0">
                <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onClickBackButton" text="Back" />
                   <Label text="Search" />
                   <TextField fx:id="searchField" maxWidth="150.0" onAction="#onClickedsearchButton" promptText="NN3 8QQ" />
                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickedsearchButton" text="Search" />

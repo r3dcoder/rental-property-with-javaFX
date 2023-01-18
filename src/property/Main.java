@@ -75,8 +75,16 @@ public class Main extends Application {
 		
 		System.out.println("showPropertyListView Clicked");
 		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/PropertyListView.fxml"));
-		BorderPane  mainItems = loader.load();
-		mainLayout.setCenter(mainItems);
+		BorderPane  mainLayout = loader.load();
+//		mainLayout.setCenter(mainItems);
+		
+		this.primaryStage.setTitle("Property Details");
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+		
+		
+		
 
 	}
 
@@ -85,11 +93,17 @@ public class Main extends Application {
 		System.out.println("property detials Clicked" + property);
 
 		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/PropertyDetailsView.fxml"));
-		BorderPane  mainItems = loader.load();
+		BorderPane  mainLayout = loader.load();
 		PropertyDetailsController propertyDetailsController = loader.getController();
  		propertyDetailsController.setProperty(property);
 
-		mainLayout.setCenter(mainItems);
+ 
+		// Set the scene
+		this.primaryStage.setTitle("Property Details");
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+		
 
 	}
 
@@ -168,12 +182,17 @@ public class Main extends Application {
 
  
 		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/InvoicePageView.fxml"));
-		BorderPane  mainItems = loader.load();
+		BorderPane  mainLayout = loader.load();
 		InvoiceController invoicecontroller = loader.getController();
-		System.out.println("invoice : "+ invoice);
-		invoicecontroller.setInvoice(invoice);
+ 		invoicecontroller.setInvoice(invoice);
 //
-		mainLayout.setCenter(mainItems);
+//		mainLayout.setCenter(mainItems);
+		
+		
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+
 
 	}
 	

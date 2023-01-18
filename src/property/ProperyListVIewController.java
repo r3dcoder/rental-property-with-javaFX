@@ -2,6 +2,7 @@ package property;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -26,9 +27,9 @@ public class ProperyListVIewController implements Initializable {
 	private TableView<Property> table;
 	@FXML
 	private TextField searchField;
-    @FXML
-    private Button searchButton;
-    
+	@FXML
+	private Button searchButton;
+
 	@FXML
 	private TableColumn<Property, Integer> bathrooms;
 
@@ -53,46 +54,62 @@ public class ProperyListVIewController implements Initializable {
 	@FXML
 	private TextArea propertyDetails;
 	private Main main;
-	
+
 	ObservableList<Property> list = FXCollections.observableArrayList(
-			DeserializePropertyList.readChildList()
+			getAvailablePropertis()
 			);
 	public ProperyListVIewController() {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("null")
+	public ArrayList<Property> getAvailablePropertis() {
+		
+		ArrayList<Property> allproperties = DeserializePropertyList.readChildList();
+
+		ArrayList<Property> availableList = new ArrayList<Property>() ;
+		
+
+		for(int i = 0 ; i<allproperties.size(); i++) {
+			if(allproperties.get(i).getIsAvailable()) 
+				availableList.add(allproperties.get(i));
+		}
+
+		return availableList;
+	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		System.out.println("Property list view Controller");
-		
+		main = new Main();
+
 		populatePropertyTable();
-		
+
 		table.setOnMouseClicked(event -> {
-				
-				goPropertyDetails();
-	        });
-	     
+
+			goPropertyDetails();
+		});
+
 	}
 
 	private void goPropertyDetails()   {
 		main = new Main();
 		System.out.println("called goPropertyDetails method: ");
-		
+
 		Property selectedProperty = table.getSelectionModel().getSelectedItem();
-//		propertyDetails.setText(selectedProperty.getDetails());
-		
+		//		propertyDetails.setText(selectedProperty.getDetails());
+
 		try {
 			main.showPropertyDetailsView(selectedProperty);
-						
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("error from go property details method");
 		}
- 	}
+	}
 
 	private void populatePropertyTable() {
-		
+
 		listed.setCellValueFactory(new PropertyValueFactory<>("listed"));
 		listed.setCellFactory(new CustomDateCellFactory<>("MM/dd/yyyy"));
 
@@ -103,22 +120,32 @@ public class ProperyListVIewController implements Initializable {
 		postcode.setCellValueFactory( new PropertyValueFactory<Property, String>("postcode"));
 		garden.setCellValueFactory( new PropertyValueFactory<Property, String>("garden"));
 		table.setItems(list);
-		
+
+	}
+
+	@FXML
+	public void onClickedsearchButton(ActionEvent event) {
+		// Get the search criteria from the search field
+		String searchCriteria = searchField.getText().toString();
+
+		// Clear the search field
+		searchField.setText("");
+
+		// Search the TableView for rows that match the search criteria
+		table.getItems().stream()
+		.filter(property -> property.getPostcode().toLowerCase().contains(searchCriteria)
+				|| property.getPostcode().toLowerCase().contains(searchCriteria))
+		.forEach(table::scrollTo);
 	}
 	
-	 @FXML
-	 public void onClickedsearchButton(ActionEvent event) {
-	        // Get the search criteria from the search field
-	        String searchCriteria = searchField.getText().toString();
-
-	        // Clear the search field
-	        searchField.setText("");
-
-	        // Search the TableView for rows that match the search criteria
-	        table.getItems().stream()
-	                .filter(property -> property.getPostcode().toLowerCase().contains(searchCriteria)
-	                        || property.getPostcode().toLowerCase().contains(searchCriteria))
-	                .forEach(table::scrollTo);
-	    }
+	@FXML
+	public void onClickBackButton(ActionEvent event) {
+		try {
+			main.showHomePage();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

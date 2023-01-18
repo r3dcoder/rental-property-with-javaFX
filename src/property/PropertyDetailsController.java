@@ -90,6 +90,16 @@ public class PropertyDetailsController {
 		distanceDetails.setText(calculateDistance());
 
 	}
+	
+	@FXML
+	public void onClickBackButton() {
+		try {
+			main.showPropertyListView();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 

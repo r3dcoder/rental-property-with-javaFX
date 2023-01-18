@@ -59,16 +59,14 @@ public class AissignCustomerController implements Initializable {
 			updatePropertyList();
 			Customer customer = new Customer();
 			String fullName = selectuserComboBox.getValue().toString();
-			System.out.println(selectuserComboBox.getValue()+ " <- full name");
 			customer = customer.getCustomer(fullName);
 
 			Invoice invoice = new Invoice(customer, property, startDate.getValue().toString(), endDate.getValue().toString(), 
 					200);
-			System.out.println(invoice);
-		
-			Main main = new Main();
-			handleCloseAction();
-			main.showInvoiceDetailsView(invoice);
+ 		
+			
+			handleCloseAction(invoice);
+			
 		}
 		else {
 			System.out.println("Please input correctly....");
@@ -89,10 +87,10 @@ public class AissignCustomerController implements Initializable {
 
 	public void updatePropertyList() {
 		setPropertyFromList();
-		int j = 0;
+		
 		ArrayList<Property> list = DeserializePropertyList.readChildList();
 		list.get(index).setAvailable(false);
-				 System.out.print("ProId: "+propertyId+ " " + list.get(j));
+		System.out.println("list index: "+ list.get(index));
 		SerializeChildList.writeToFile(list, "property.dat");
 
 		
@@ -195,10 +193,17 @@ public class AissignCustomerController implements Initializable {
 		else return false;
 	}
 	
-	 @FXML
-	 public void handleCloseAction() {
+	  
+	 public void handleCloseAction(Invoice invoice) {
 	   Stage stage = (Stage) depositeField.getScene().getWindow();
 	   stage.close();
+	   Main main = new Main();
+	   try {
+		main.showInvoiceDetailsView(invoice);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	 }
 
 }
