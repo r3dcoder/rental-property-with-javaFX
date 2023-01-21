@@ -49,6 +49,8 @@ public class CSVReaderForPlaceOfInterest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        SerializeChildList.writeToFile(placeOfInterest, "placeOfInterest.dat"); 
+
  
 	}
 

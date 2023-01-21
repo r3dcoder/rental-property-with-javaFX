@@ -1,12 +1,16 @@
 package property.models;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import customer.models.Customer;
 
-public class Invoice {
-    private Customer tenant;
+public class Invoice  implements Serializable  {
+ 	private static final long serialVersionUID = 1L;
+	private Customer tenant;
+	private String customerFullName;
+	private String customerPhoneNumber;
     private Property property;
     private String startDate;
     private String endDate;
@@ -31,6 +35,8 @@ public class Invoice {
         this.subTotal =  this.deposit + this.agentFee;
         this.amountDue = subTotal - customerDeposite;
         this.setInviceDate(new Date());
+        this.customerFullName  = tenant.getFullName();
+        this.customerPhoneNumber = tenant.getPhoneNumber();
     }
 
 
@@ -69,29 +75,29 @@ public class Invoice {
  
         StringBuilder sb = new StringBuilder();
         sb.append("-----------------Invoice--------------").append("\n");
-        sb.append("......................................\n");
+         
         
-        sb.append("Invoice Date: ----------").append(this.getInviceDate()).append("\n");
+        sb.append("Invoice Date: --------------------").append(this.getInviceDate()).append("\n");
         sb.append("\n");
-        sb.append("Property Id: -----------").append(this.property.getId()).append("\n");
+        sb.append("Property Id: ---------------------").append(this.property.getId()).append("\n");
         sb.append("\n");
         
         
-        sb.append("Customer Name: ---------").append(this.getTenant().getFullName()).append("\n");
+        sb.append("Customer Name: -------------------").append(this.getTenant().getFullName()).append("\n");
         sb.append("\n");
-        sb.append("Start Date: ------------").append(this.getStartDate()).append("\n");
+        sb.append("Start Date: ----------------------").append(this.getStartDate()).append("\n");
         sb.append("\n");
         
 
-        sb.append("End Date: --------------").append(this.getEndDate()).append("\n");
+        sb.append("End Date: ------------------------").append(this.getEndDate()).append("\n");
         sb.append("\n");
-        sb.append("Rent/Month: ------------").append(this.property.getRentPerMonth()).append("\n");
+        sb.append("Rent/Month: ----------------------").append(this.property.getRentPerMonth()).append("\n");
         sb.append("\n");
-        sb.append("Number of Months: ------").append(6).append("\n");
+        sb.append("Number of Months: ----------------").append(6).append("\n");
         sb.append("\n");
-        sb.append("Agent Fee --------------").append(this.getAgentFee()).append("\n");
+        sb.append("Agent Fee ------------------------").append(this.getAgentFee()).append("\n");
         sb.append("\n");
-        sb.append("Subtotal: --------------").append(this.getSubTotal()).append("\n");
+        sb.append("Subtotal: ------------------------").append(this.getSubTotal()).append("\n");
         sb.append("\n");
         return sb.toString();
     }
@@ -110,10 +116,31 @@ public class Invoice {
 	public double getSubTotal() {
 		return subTotal;
 	}
+	
 
 
 	public void setSubTotal(double subTotal) {
 		this.subTotal = subTotal;
+	}
+
+
+	public String getCustomerFullName() {
+		return customerFullName;
+	}
+
+
+	public void setCustomerFullName(String customerFullName) {
+		this.customerFullName = customerFullName;
+	}
+
+
+	public String getCustomerPhoneNumber() {
+		return customerPhoneNumber;
+	}
+
+
+	public void setCustomerPhoneNumber(String customerPhoneNumber) {
+		this.customerPhoneNumber = customerPhoneNumber;
 	}
 }
 

@@ -83,11 +83,20 @@ public class Main extends Application {
 		this.primaryStage.setScene(scene);
 		this.primaryStage.show();
 		
-		
-		
-
 	}
+	
+	public void showRentedPropertyListView() throws IOException {
 
+		
+		System.out.println("showPropertyListView Clicked");
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/RentedPropertyListView.fxml"));
+		BorderPane  mainLayout = loader.load();
+		this.primaryStage.setTitle("Rented Properties");
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+		
+	}
 	public void showPropertyDetailsView(Property property) throws IOException {
 
 		System.out.println("property detials Clicked" + property);
@@ -124,6 +133,35 @@ public class Main extends Application {
 	} 
 	
 //	Customers view handelling
+	
+	
+	
+	public void showInvoiceListView() throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/InvoiceListView.fxml"));
+		BorderPane  mainLayout = loader.load();
+ 
+		// Set the scene
+		this.primaryStage.setTitle("Rental House App/Invoice List");
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+
+	}
+	
+	public void showPlaceOfInterestListView() throws IOException {
+		
+		System.out.println("showCustomerListView Clicked");
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/PlaceOfInterestListView.fxml"));
+		BorderPane  mainLayout = loader.load();
+ 
+		// Set the scene
+		this.primaryStage.setTitle("Rental House App/Place Of Interest List");
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+
+	}
 	
 	public void showCustomerListView() throws IOException {
 		

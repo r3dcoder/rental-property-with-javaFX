@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="property.PlaceOfInterestListVIewController">
+   <center>
+      <FlowPane maxWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="700.0" spacing="10.0">
+               <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onClickBackButton" text="Back" />
+                  <Label text="Search" />
+                  <TextField fx:id="searchField" maxWidth="150.0" onAction="#onClickedsearchButton" promptText="NN3 8QQ" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onClickedsearchButton" text="Search" />
+               </children>
+            </HBox>
+            <TableView fx:id="table" prefHeight="442.0" prefWidth="695.0">
+               <columns>
+                  <TableColumn fx:id="name" prefWidth="232.0" text="Name" />
+                  <TableColumn fx:id="postcode" prefWidth="174.0" text="Postcode" />
+                  <TableColumn fx:id="latitude" prefWidth="146.0" text="Latitude" />
+                  <TableColumn fx:id="longitude" prefWidth="138.0" text="longitude" />
+               </columns>
+            </TableView>
+         </children>
+      </FlowPane>
+   </center>
+</BorderPane>

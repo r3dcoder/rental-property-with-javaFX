@@ -1,7 +1,10 @@
 package property.models;
 
-public class PlaceOfInterest {
-    private String name;
+import java.io.Serializable;
+
+public class PlaceOfInterest  implements Serializable  {
+    private static final long serialVersionUID = 1L;
+	private String name;
     private String postcode;
     private double latitude;
     private double longitude;

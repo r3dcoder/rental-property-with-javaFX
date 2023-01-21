@@ -24,7 +24,7 @@ public class ConvertToPdf {
 
 	        document.close();
 
-	        System.out.println("Done");
+	        System.out.println("PDF Done");
 	        
 		} catch (Exception e) {
 			// TODO: handle exception

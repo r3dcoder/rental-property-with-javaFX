@@ -55,7 +55,7 @@ public class AissignCustomerController implements Initializable {
 	public void onClickedAssignButton(ActionEvent event) throws IOException {
 
 		if(startDate != null && endDate != null && selectuserComboBox.getValue()!=null){
-			 
+			dateValidation();
 			updatePropertyList();
 			Customer customer = new Customer();
 			String fullName = selectuserComboBox.getValue().toString();
@@ -63,20 +63,21 @@ public class AissignCustomerController implements Initializable {
 
 			Invoice invoice = new Invoice(customer, property, startDate.getValue().toString(), endDate.getValue().toString(), 
 					200);
- 		
-			
+
+			InvoiceController iController = new InvoiceController();
+			iController.addOnFile(invoice);
 			handleCloseAction(invoice);
-			
+
 		}
 		else {
 			System.out.println("Please input correctly....");
 		}
 
 
-		
+
 		try {
-			
-			
+
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Please input correctly..");
@@ -87,25 +88,25 @@ public class AissignCustomerController implements Initializable {
 
 	public void updatePropertyList() {
 		setPropertyFromList();
-		
+
 		ArrayList<Property> list = DeserializePropertyList.readChildList();
 		list.get(index).setAvailable(false);
 		System.out.println("list index: "+ list.get(index));
 		SerializeChildList.writeToFile(list, "property.dat");
 
-		
+
 	}
 
 	public void setPropertyFromList(){
 
-		
-		
+
+
 		ArrayList<Property> list = DeserializePropertyList.readChildList();
-		
+
 		System.out.println("setPropertyFromList");
 		for(int i = 0; i<list.size(); i++) {
 			if(list.get(i).getId().equals(propertyId)) {
-//				list.get(i).setAvailable(false);
+				//				list.get(i).setAvailable(false);
 				index = i;
 				setProperty(list.get(i));
 				setSubtotal();
@@ -120,7 +121,7 @@ public class AissignCustomerController implements Initializable {
 	public void handleCombobox() {
 
 		System.out.println("handleCombobox");
-		
+
 		selectuserComboBox.setItems(FXCollections.observableArrayList(
 				DeserializeCustomerList.readChildList()
 				));
@@ -145,14 +146,14 @@ public class AissignCustomerController implements Initializable {
 			}
 		});
 
-		
+
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		handleCombobox();
-		
+
 	}
 
 
@@ -182,29 +183,25 @@ public class AissignCustomerController implements Initializable {
 		System.out.println("Sub Total: "+ subTotal);
 		depositeField.setText(String.valueOf(subTotal));
 	}
-	
+
 	public Boolean dateValidation() {
- 
+
 		Period diff = Period.between(
-	            LocalDate.parse(startDate.getValue().toString()).withDayOfMonth(1),
-	            LocalDate.parse(startDate.getValue().toString()).withDayOfMonth(1));
-	
+				LocalDate.parse(startDate.getValue().toString()).withDayOfMonth(1),
+				LocalDate.parse(startDate.getValue().toString()).withDayOfMonth(1));
+
+		System.out.println("Diff: " + diff);
 		if(diff.getMonths()>5) return true;
 		else return false;
 	}
-	
-	  
-	 public void handleCloseAction(Invoice invoice) {
-	   Stage stage = (Stage) depositeField.getScene().getWindow();
-	   stage.close();
-	   Main main = new Main();
-	   try {
-		main.showInvoiceDetailsView(invoice);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+
+
+	public void handleCloseAction(Invoice invoice) {
+		Stage stage = (Stage) depositeField.getScene().getWindow();
+		stage.close();
+		InvoiceController iController = new InvoiceController();
+		iController.showInvoicePageView(invoice);
 	}
-	 }
 
 }
 

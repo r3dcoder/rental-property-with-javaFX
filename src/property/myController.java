@@ -32,7 +32,30 @@ public class myController {
 	     }
 	 }
  	 
-
+ 	
+ 	@FXML
+	 private void onClickedInvoiceListButton() throws IOException {
+	     try {
+	         System.out.println("Trying to call showAddPropertyView on main object");
+	         main.showInvoiceListView();
+	     } catch (Exception e) {
+	         System.out.println("Error calling showAddPropertyView on main object: " + e.getMessage());
+	         e.printStackTrace();
+	     }
+	 }
+ 	
+ 	@FXML
+	 private void onClickedPlaceOfInterestListButton() throws IOException {
+	     try {
+	         System.out.println("Trying to call showAddPropertyView on main object");
+	         main.showPlaceOfInterestListView();
+	     } catch (Exception e) {
+	         System.out.println("Error calling showAddPropertyView on main object: " + e.getMessage());
+	         e.printStackTrace();
+	     }
+	 }
+ 	
+ 	
  	 @FXML
 	 private void onClickedCustomerListButton() throws IOException {
 	     try {
@@ -43,6 +66,7 @@ public class myController {
 	         e.printStackTrace();
 	     }
 	 }
+ 	
  	
  	@FXML
 	 private void onClickedPropertyListButton() throws IOException {
@@ -55,6 +79,17 @@ public class myController {
 	     }
 	 }
  	
+ 	@FXML
+	 private void onClickedRentedPropertyListButton() throws IOException {
+	     try {
+	         System.out.println("Trying to call show showRentedPropertyListView List View Sceen");
+	         main.showRentedPropertyListView();
+	     } catch (Exception e) {
+	         System.out.println("Error calling showRentedPropertyListView on main object: " + e.getMessage());
+	         e.printStackTrace();
+	     }
+	 }
+	
  	@FXML
 	 public void onClickedHomeButton() throws IOException {
 	     try {
