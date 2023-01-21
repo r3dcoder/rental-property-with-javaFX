@@ -29,15 +29,26 @@ public class Invoice  implements Serializable  {
         this.startDate = startDate;
         this.endDate = endDate;
          
+        System.out.println("customerDeposite "+ customerDeposite);
 
-        this.deposit = property.getRentPerMonth() * 6;
-        this.agentFee = property.getRentPerMonth() * 0.2;
-        this.subTotal =  this.deposit + this.agentFee;
+        if(customerDeposite==-1) {
+        	
+
+            this.deposit = property.getRentPerMonth() * 6;
+            this.agentFee = property.getRentPerMonth() * 0.2;
+            this.subTotal =  this.deposit + this.agentFee;
+        }
+        else {
+        	this.subTotal =  customerDeposite;
+            this.deposit = customerDeposite;
+            this.agentFee = 0;
+        }
+        
         this.amountDue = subTotal - customerDeposite;
         this.setInviceDate(new Date());
         this.customerFullName  = tenant.getFullName();
         this.customerPhoneNumber = tenant.getPhoneNumber();
-    }
+     }
 
 
     public double getDeposit() {

@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -28,8 +29,14 @@ import javafx.util.StringConverter;
 import property.models.Invoice;
 import property.models.Property;
 
-public class AissignCustomerController implements Initializable {
+public class EndTenancyController implements Initializable {
 
+	@FXML
+    private TextField customerName;
+ 
+
+    @FXML
+    private TextField startDate;
 	@FXML
 	private TextField depositeField;
 
@@ -39,30 +46,28 @@ public class AissignCustomerController implements Initializable {
 	@FXML
 	private ComboBox<Customer> selectuserComboBox;
 
-	@FXML
-	private DatePicker startDate;
-
+	 
 	private String propertyId ;
+	private String fullName ;
 	private Property property; 
 	private int index;
 
 
-	public AissignCustomerController() {
+	public EndTenancyController() {
 
 	}
 
 	@FXML
 	public void onClickedAssignButton(ActionEvent event) throws IOException {
 
-		if(startDate != null && endDate != null && selectuserComboBox.getValue()!=null){
-			dateValidation();
+		if( endDate != null){
+			 
 			updatePropertyList();
 			Customer customer = new Customer();
-			String fullName = selectuserComboBox.getValue().toString();
-			customer = customer.getCustomer(fullName);
+ 			customer = customer.getCustomer(this.fullName);
 
-			Invoice invoice = new Invoice(customer, property, startDate.getValue().toString(), endDate.getValue().toString(), 
-					-1);
+			Invoice invoice = new Invoice(customer, property, endDate.getValue().toString(), endDate.getValue().toString(), 
+					Double.parseDouble(depositeField.getText()));
 
 			InvoiceController iController = new InvoiceController();
 			iController.addOnFile(invoice);
@@ -90,7 +95,7 @@ public class AissignCustomerController implements Initializable {
 		setPropertyFromList();
 
 		ArrayList<Property> list = DeserializePropertyList.readChildList();
-		list.get(index).setAvailable(false);
+		list.get(index).setAvailable(true);
 		System.out.println("list index: "+ list.get(index));
 		SerializeChildList.writeToFile(list, "property.dat");
 
@@ -121,37 +126,16 @@ public class AissignCustomerController implements Initializable {
 	public void handleCombobox() {
 
 		System.out.println("handleCombobox");
+		customerName.setText(getFullName());
+ 		System.out.println("fn "+ getFullName());
 
-		selectuserComboBox.setItems(FXCollections.observableArrayList(
-				DeserializeCustomerList.readChildList()
-				));
-
-		selectuserComboBox.setCellFactory( new Callback<ListView<Customer>, ListCell<Customer>>() {
-			public ListCell<Customer> call(ListView<Customer> param) {
-				final ListCell<Customer> cell = new ListCell<Customer>() {
-					@Override
-					protected void updateItem(Customer t, boolean bln) {
-						super.updateItem(t, bln);
-
-						if (t != null) {
-							setText(t.getFullName().toString());
-							if(propertyId!=null)setPropertyFromList();
-
-						} else {
-							setText(null);
-						}
-					}
-				};
-				return cell;
-			}
-		});
-
-
+//		startDate.setText(get);
+ 
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		customerName.setText(getFullName());
 		handleCombobox();
 
 	}
@@ -177,23 +161,14 @@ public class AissignCustomerController implements Initializable {
 
 	public void setSubtotal() {
 
-		double deposit = property.getRentPerMonth() * 6;
-		double agentFee = property.getRentPerMonth() * 0.2;
-		double subTotal =  deposit + agentFee;
-		System.out.println("Sub Total: "+ subTotal);
-		depositeField.setText(String.valueOf(subTotal));
+//		double deposit = property.getRentPerMonth() * 6;
+//		double agentFee = property.getRentPerMonth() * 0.2;
+//		double subTotal =  deposit + agentFee;
+//		System.out.println("Sub Total: "+ subTotal);
+		depositeField.setText(String.valueOf(depositeField.getText()));
 	}
 
-	public Boolean dateValidation() {
-
-		Period diff = Period.between(
-				LocalDate.parse(startDate.getValue().toString()).withDayOfMonth(1),
-				LocalDate.parse(startDate.getValue().toString()).withDayOfMonth(1));
-
-		System.out.println("Diff: " + diff);
-		if(diff.getMonths()>5) return true;
-		else return false;
-	}
+ 
 
 
 	public void handleCloseAction(Invoice invoice) {
@@ -201,6 +176,15 @@ public class AissignCustomerController implements Initializable {
 		stage.close();
 		InvoiceController iController = new InvoiceController();
 		iController.showInvoicePageView(invoice);
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+		customerName.setText(fullName);
 	}
 
 }

@@ -100,7 +100,7 @@ public class RentedPropertyListController implements Initializable {
 		//		propertyDetails.setText(selectedProperty.getDetails());
 
 		try {
-			main.showPropertyDetailsView(selectedProperty);
+			main.showRentedPropertyDetailsView(selectedProperty);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

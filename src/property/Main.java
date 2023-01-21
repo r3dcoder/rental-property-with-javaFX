@@ -97,6 +97,26 @@ public class Main extends Application {
 		this.primaryStage.show();
 		
 	}
+	
+	public void showRentedPropertyDetailsView(Property property) throws IOException {
+
+		System.out.println("property detials Clicked" + property);
+
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/RentedPropertyDetails.fxml"));
+		BorderPane  mainLayout = loader.load();
+		RentedPropertyDetailsController propertyDetailsController = loader.getController();
+ 		propertyDetailsController.setProperty(property);
+
+ 
+		// Set the scene
+		this.primaryStage.setTitle("Rented Property Details");
+		Scene scene = new Scene(mainLayout);
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+		
+
+	}
+
 	public void showPropertyDetailsView(Property property) throws IOException {
 
 		System.out.println("property detials Clicked" + property);
@@ -190,6 +210,27 @@ public class Main extends Application {
 		
 		AissignCustomerController controller = loader.getController();
  		controller.setPropertyId(propertyId);
+ 		
+		addDialougeStage.initOwner(primaryStage);
+		Scene sceen = new Scene(newProperty);
+		addDialougeStage.setScene(sceen);
+		addDialougeStage.show();
+	} 
+	
+	public void showEndtenancyFormView(String propertyId, String fullName) throws IOException {
+
+		//        System.out.println("Clicked");
+
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/EndTenancyFormView.fxml"));
+		BorderPane newProperty = loader.load();
+
+		Stage addDialougeStage = new Stage();
+		addDialougeStage.setTitle("End Tenancy ");
+		addDialougeStage.initModality(Modality.WINDOW_MODAL);
+		
+		EndTenancyController controller = loader.getController();
+ 		controller.setPropertyId(propertyId);
+ 		controller.setFullName(fullName);
  		
 		addDialougeStage.initOwner(primaryStage);
 		Scene sceen = new Scene(newProperty);
